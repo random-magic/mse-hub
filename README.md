@@ -2,39 +2,37 @@
 
 Follow these instructions to set up your own MSE Hub.
 
-## Prerequisites
-
-### Install Github Desktop
-
-This isn't strictly necessary, but promise me, it'll make your life a lot easier. You can get GH Desktop [here](https://desktop.github.com/download/).
-
-### Install Python
-
-This one *is* strictly necessary, as the script that builds the entire site is written in Python. You can get it [here](https://www.python.org/downloads/).
-
 ## Step 1: Fork me
 
-If you're reading this, you're probably already here, but in case you aren't, navigate to https://github.com/magictheegg/mse-hub/. At the top, click the "Fork" button to start creating your own fork of the code.
+If you're reading this, you're probably already here, but in case you aren't, navigate to https://github.com/ebbit1q/mse-hub/. At the top, click the "Fork" button to start creating your own fork of the repo.
 
 ![Fork](https://github.com/magictheegg/mse-hub-readme/blob/main/fork.png?raw=true)
 
-On the next page, **change the "Repository name" field** to \<your-github-username\>.github.io. This is **critical** for making your code actually deploy to Github sites. You can add a Description if you want. Keep "Copy the `main` branch only" checked. Once you've renamed the repository, click "Create fork".
+On the next page, **change the "Repository name" field** to `username.github.io`. Replace `username` with your GitHub username. For example, if your username is `octocat`, the repository name should be `octocat.github.io`. This is **critical** for making your repo actually deploy to GitHub sites. You can add a Description if you want. Keep "Copy the `main` branch only" checked. Once you've renamed the repository, click "Create fork".
 
 ![Fork part 2](https://github.com/magictheegg/mse-hub-readme/blob/main/fork-part-two.png?raw=true)
 
-Once the fork is created, you'll see the code in Github. Now it's time to move to Github desktop.
+It will now open your forked repo, it's recommended to bookmark or save this page. Close this guide and continue to step 2 in the copy of the guide on your forked repo.
 
-Once you've logged into Github Desktop, click File => Clone repository ... and you should see your forked repository in the repo list. Click it, then choose clone. When the "How are you planning to use this fork?" modal pops up, select "For my own purposes," then Continue.
+#### Ensure github pages is configured correctly
 
-![How are you planning to use this fork?](https://github.com/magictheegg/mse-hub-readme/blob/main/how-fork.png?raw=true)
+Go to the "Settings" tab of your repo and then select "Pages" from the left menu, [here](../../settings/pages). Ensure the setting "Source" in the "Build and Deployment" section is set to "GitHub Actions":
 
-Finally, in the bar along the top, select "Fetch origin" to pull the origin into your forked repo.
+<img width="266" height="115" alt="image" src="https://github.com/user-attachments/assets/91008dad-6060-4bec-b019-f4b7222636f4" />
 
-## Step 2: Exporting set files
+## Step 2: Installing the exporter
+
+Visit your generated github.io site, it will be at `https://username.github.io`. Replacing `username` with your GitHub username. For example if your username is `octocat` your site will be at `https://octocat.github.io`.
+
+Edit the url, adding `/exporter.zip` to the end. For example if your username is `octocat` go to `https://octocat/github.io/exporter.zip`. Visit it and when prompted download this file. (alternatively, it's also in the resources folder of the repo)
+
+Unzip it and place it into the "data" folder of MSE. Ensure the folder structure remains the same, your data folder should have one additional folder named `magic-egg-allinone-exporter.mse-export-template`.
+
+## Step 3: Exporting set files
+
+Start MSE. Open a set you'd like to export, then click File => Export => HTML ... and select Egg's All-in-One. This will export all of your site files.
 
 > :memo: **Note:** This exporter uses the "Title" and "Set code" entered in the "Set info" tab of your MSE set. If those aren't set, the exporter will exhibit strange behavior.
-
-In the resources folder of your cloned repo, you'll find the "magic-egg-allinone" exporter. Copy that into the "data" folder of MSE, then open the program. Open a set you'd like to export, then click File => Export => HTML ... and select Egg's All-in-One. This will export all of your site files.
 
 The options you can select are as follows:
 - **Export images**: Defaults to "Yes". Only change this if for some reason you don't need images with your export.
@@ -44,40 +42,19 @@ The options you can select are as follows:
 - **Formats**: This is a text field where you can enter any custom formats your set is a part of, which can be queried in your site's search.
 - **V mana replacement**: If you're using a custom V mana symbol, insert it here.
 
-Once each of these options is filled out, click OK and save the set file as "\<set_code\>.txt". (This should match the "Set code" in your "Set info" tab.) This will take a second as the application exports all your images, and the end result is two outputs:
-- **\<code\>.txt**, which is irrelevant.
-- **\<code\>-files**, a directory containing all the files necessary to publish your set onto your hub.
+Once each of these options is filled out, click OK and save the set file as `set_code.txt`. Replace `set_code` with your set code. This should match the "Set code" in your "Set info" tab. This will take a second as the application exports all your images, and the end result is two outputs:
+- `set_code.txt`, which is irrelevant.
+- `set_code-files`, a directory containing all the files necessary to publish your set onto your hub.
 
-## Step 3: Generating the site
+## Step 4: Upload your files to github
 
-Surprisingly, you're almost done! Copy the "\<code\>-files" folder (the entire directory) into the "sets" folder of your GitHub checkout. Open Github Desktop, and you should see that directory in the "Changes" sidebar. Click Repository => Open in Terminal (or Command Prompt for Windows machines).
-
-In the opened terminal, execute the following commands:
-
-```
-git config --global http.postBuffer 157286400
-python3 -m pip install pillow markdown
-```
-
-This updates your buffer so you can upload all of your images with no timeout issues and installs required packages. Otherwise, git sometimes gets tired and quits somewhat arbitrarily. You only need to do this ONCE. Afterwards, execute:
-
-```
-python3 scripts/build_site.py
-```
-
-> :memo: **Note:** If at this point `python3` prompts you to install through the Windows Store, do so. It's the path of least resistance.
-
-> :memo: **Note:** If `python3` can't be found, try running the same command with `py` or `python` instead.
-
-This will spit out a bunch of confirmation lines for different site elements being built. The first time it runs, it will take a few minutes to process through each image. Subsequent runs will be much quicker, unless you update the images with new files. After the command finishes, navigate back to Github desktop and you should see plenty of new artifacts in the "Changes" sidebar. In the bottom left, type a title for your change (this is for versioning), then click "Commit to main". Once you've done so, a big "Push origin" button will appear in the middle of the window. Click that, wait for the push to finish, and voila! Your site is deployed.
-
-To track the process of your site deployment, navigate to https://github.com/USERNAME/USERNAME.github.io/actions, replacing USERNAME with your Github username. Each time you push to origin, a deployment action will trigger, and once that's complete your site will be visible at https://\<username\>.github.io.
+In your repo go to the "sets" folder, then in the top right click "add file" then "upload files", [here](../../upload/main/sets). Then drag and drop the `set_code-files` folders you created in step 2 in there. It's also allowed to upload a zip file of your files folder.
 
 ## Future MSE Set Hub Updates
 
-To get updates to the scripts or resources, from Github Desktop, select "Fetch origin" in the bar along the top and wait for that process to complete. Once it's done, select "Current branch" in the same bar, then at the bottom of the opened menu click "Choose a branch to merge into **main**". On the next modal, select "upstream/main", then click "Create a merge commit". This will bring all new code in the main repo into your forked repo, and it will be ready to push the next time you push the contents of your site to main.
+To get updates to the scripts or resources, go to your repo on github (saved in step 1). There, above the list of files click the "Sync fork" button and selec to update it.
 
-If it's indicated that the new change comes with a change to the exporter, you can find the updated exporter in the `resources` directory. Make sure to copy it into your MSE's `data` folder.
+If it's indicated that the new change comes with a change to the exporter, you can go through step 2 again, make sure it overwrites the previous exporter.
 
 ---
 
