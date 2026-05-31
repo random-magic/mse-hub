@@ -127,6 +127,9 @@ for entry in os.scandir('sets'):
 	elif entry.name != 'README.md' and os.path.isfile(entry):
 		os.remove(entry)
 
+if not set_codes:
+    print("no sets were found in the sets folder, sets are folders that end with -files!")
+
 for entry in os.scandir('lists'):
 	if entry.name != 'README.md' and os.path.isfile(entry):
 		os.remove(entry)
