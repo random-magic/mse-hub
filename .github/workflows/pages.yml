@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         
       - name: Install dependencies
         run: pip install pillow markdown
@@ -57,10 +57,13 @@ jobs:
         run: python scripts/build_site.py
         
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
+
+      - name: Add repo link
+        run: echo "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" >repo.md
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           # Upload entire repository
           path: '.'
