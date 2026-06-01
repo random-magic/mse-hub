@@ -8,27 +8,29 @@ If you're reading this, you're probably already here, but in case you aren't, na
 
 ![Fork](https://github.com/magictheegg/mse-hub-readme/blob/main/fork.png?raw=true)
 
-On the next page, **change the "Repository name" field** to `username.github.io`. Replace `username` with your GitHub username. For example, if your username is `octocat`, the repository name should be `octocat.github.io`. This is **critical** for making your repo actually deploy to GitHub sites. You can add a Description if you want. Keep "Copy the `main` branch only" checked. Once you've renamed the repository, click "Create fork".
+On the next page, it is recommended to change the "Repository name" field to `username.github.io`. Replace `username` with your GitHub username. For example, if your username is `octocat`, the repository name should be `octocat.github.io`. You can add a Description if you want. Keep "Copy the `main` branch only" checked. Once you've renamed the repository, click "Create fork".
 
 ![Fork part 2](https://github.com/magictheegg/mse-hub-readme/blob/main/fork-part-two.png?raw=true)
 
-It will now open your forked repo, it's recommended to bookmark or save this page. Close this guide and continue to step 2 in the copy of the guide on your forked repo.
+It will now open your forked repo, it's recommended to bookmark or save this page. Close the guide you are currently following and continue to step 2 in the copy of the guide on your forked repo.
 
-#### Ensure github pages is configured correctly
+## Step 2: Ensure github pages is configured correctly
 
 Go to the "Settings" tab of your repo and then select "Pages" from the left menu, [here](../../settings/pages). Ensure the setting "Source" in the "Build and Deployment" section is set to "GitHub Actions":
 
 <img width="266" height="115" alt="image" src="https://github.com/user-attachments/assets/91008dad-6060-4bec-b019-f4b7222636f4" />
 
-## Step 2: Installing the exporter
+In addition: if you have chosen a different name for your repo than `username.github.io` it will show you the current location the site is deployed to, click "Visit site" to go to then new site. Save this url as well.
 
-Visit your generated github.io site, it will be at `https://username.github.io`. Replacing `username` with your GitHub username. For example if your username is `octocat` your site will be at `https://octocat.github.io`.
+## Step 3: Installing the exporter
 
-Edit the url, adding `/exporter.zip` to the end. For example if your username is `octocat` go to `https://octocat/github.io/exporter.zip`. Visit it and when prompted download this file. (alternatively, it's also in the resources folder of the repo)
+Visit your generated github.io site, as found at the end of step 2.
+
+Edit the url, adding `/exporter.zip` to the end. For example if your site's url is `https://octocat.github.io` go to `https://octocat/github.io/exporter.zip`. Visit it and when prompted download this file. (alternatively, it's also in the resources folder of the repo)
 
 Unzip it and place it into the "data" folder of MSE. Ensure the folder structure remains the same, your data folder should have one additional folder named `magic-egg-allinone-exporter.mse-export-template`.
 
-## Step 3: Exporting set files
+## Step 4: Exporting set files
 
 Start MSE. Open a set you'd like to export, then click File => Export => HTML ... and select Egg's All-in-One. This will export all of your site files.
 
@@ -46,15 +48,17 @@ Once each of these options is filled out, click OK and save the set file as `set
 - `set_code.txt`, which is irrelevant.
 - `set_code-files`, a directory containing all the files necessary to publish your set onto your hub.
 
-## Step 4: Upload your files to github
+## Step 5: Upload your files to github
 
-In your repo go to the "sets" folder, then in the top right click "add file" then "upload files", [here](../../upload/main/sets). Then drag and drop the `set_code-files` folders you created in step 2 in there. It's also allowed to upload a zip file of your files folder.
+In your repo go to the "sets" folder, then in the top right click "add file" then "upload files", [here](../../upload/main/sets). Then drag and drop the `set_code-files` folders you created in step 4 in there. It's also allowed to select and upload a zip file of your files folder.
 
 ## Future MSE Set Hub Updates
 
-To get updates to the scripts or resources, go to your repo on github (saved in step 1). There, above the list of files click the "Sync fork" button and selec to update it.
+To get updates to the scripts or resources, go to your repo on github saved in step 1. If you forgot your repo url visit your site saved in step 2 and add `/repo` to the end of the url.
 
-If it's indicated that the new change comes with a change to the exporter, you can go through step 2 again, make sure it overwrites the previous exporter.
+There, above the list of files click the "Sync fork" button and select to update it.
+
+If it's indicated that the new change comes with a change to the exporter, you can go through step 3 again, make sure it overwrites the previous exporter.
 
 ---
 
